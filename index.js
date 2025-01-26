@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const App = express();
 const UsersRoute = require("./Routes/AuthuserRoute");
+const LoanRoute = require("./Routes/LoanRoutes");
+
 const cors = require("cors");
 
 App.use(cors());
@@ -12,6 +14,7 @@ App.get("/", (req,res)=> {
     res.send("Server Started ONG");
 });
 
+App.use("/loans", LoanRoute);
 App.use("/auth"  , UsersRoute);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
